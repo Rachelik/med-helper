@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @med.name %>
+</p>
+
+<p>
+  <strong>Indication:</strong>
+  <%= @med.indication %>
+</p>
+
+<p>
+  <strong>Frequency:</strong>
+  <%= @med.frequency %>
+</p>
+
+<p>
+  <strong>Time:</strong>
+  <%= @med.time %>
+</p>
+
+<p>
+  <strong>Dosage:</strong>
+  <%= @med.dosage %>
+</p>
+
+<p>
+  <strong>Date start:</strong>
+  <%= @med.date_start %>
+</p>
+
+<p>
+  <strong>Duration:</strong>
+  <%= @med.duration %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @med.user_id %>
+</p>
+
+<%= link_to 'Edit', edit_med_path(@med) %> |
+<%= link_to 'Back', meds_path %>

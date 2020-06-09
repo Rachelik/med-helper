@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  indication: MyString
+  frequency: 1
+  time: MyString
+  dosage: MyString
+  date_start: 2020-06-09 17:55:09
+  duration: 1
+  user: one
+
+two:
+  name: MyString
+  indication: MyString
+  frequency: 1
+  time: MyString
+  dosage: MyString
+  date_start: 2020-06-09 17:55:09
+  duration: 1
+  user: two
