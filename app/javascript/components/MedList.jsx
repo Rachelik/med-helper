@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import Med from './Med.jsx'
+import moment from 'moment'
 
 class MedList extends React.Component {
 
@@ -8,14 +9,18 @@ class MedList extends React.Component {
     super();
 
     this.state = {
-        meds:[]
+        meds: [],
+        before_food: [],
+        after_food: [],
+        date_end: null
     };
   }
   async componentDidMount() {
     const url = '/meds.json';
     const runWhenDone = (response) => {
-       const data = response.data
-       this.setState({ meds: data })
+       const dataB = response.data.filter(med => med.indication.includes('Before food'))
+       const dataA = response.data.filter(med => med.indication.includes('After food'))
+       this.setState({ before_food: dataB, after_food: dataA })
     }
     const whenError = (error) => {
       console.log("error", error)
@@ -23,29 +28,38 @@ class MedList extends React.Component {
     await axios.get(url).then(runWhenDone).catch(whenError);
   }
 
-//when clicked, it will be able to show one of the item
+//when clicked, it will be able to show one of the meds only
+//want to change this to be able to edit.
   clickedHandler=(event) =>{
-    console.log("name clicked!!!!" + event.target.innerText)
-    this.setState({
-      click: event.target.innerText,
-      meds: this.state.meds.filter(med => med.name.includes(event.target.innerText))
-    })
+    console.log("name clicked!!!! " + event.target.innerText)
+  //   let med = this.state.meds.filter(med => med.name.includes(event.target.innerText))
+  //   let date_end = med.date_start + med.duration
+  //   console.log(moment(med[0].date_start).add(med[0].duration, 'day').format('DD MMM YYYY hh:mm'))
+  //   this.setState({
+  //     meds: med
+  //   })
   }
 
   render() {
-    let meds = this.state.meds
+    let before_food = this.state.before_food
       .map((med, index)=>{
         return (
           <div className="med" key={med.id}>
             <div className="med-info">
-              <a href="#" onClick={this.clickedHandler}><h4>{med.name}</h4></a>
-              <p>{med.date_end}</p>
-              <p>{med.indication}</p>
-              <p>{med.dosage}</p>
-              <p>{med.time}</p>
-              <p>{med.duration}</p>
-              <p>{med.date_start}</p>
-              <p>{med.frequency}</p>
+             {/*<a href="#" onClick={this.clickedHandler}><h4>{med.name}</h4></a>*/}
+              <p>{med.name}, {med.dosage}</p>
+              <p>{moment(med.date_start).format()}</p>
+            </div>
+          </div>
+        );
+    });
+
+    let after_food = this.state.after_food
+      .map((med, index)=>{
+        return (
+          <div className="med" key={med.id}>
+            <div className="med-info">
+              <p>{med.name}, {med.dosage}</p>
             </div>
           </div>
         );
@@ -68,14 +82,19 @@ class MedList extends React.Component {
     // });
 
     return (
-      <div className="app-content">
         <div className="container">
-          <h3>Meds</h3>
+          <div className="med-list">
+              {before_food}
+          </div>
           <div>
-              {meds}
+            <hr/>
+              <h4>Meals</h4>
+            <hr/>
+          </div>
+          <div className="med-list">
+              {after_food}
           </div>
         </div>
-      </div>
     );
   }
 }
