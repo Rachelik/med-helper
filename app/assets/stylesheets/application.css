@@ -13,3 +13,44 @@
  *= require_tree .
  *= require_self
  */
+
+
+
+body {
+  background-color: lightgrey;
+  font-family: sans-serif;
+  padding: 20px;
+  margin: 20px auto;
+  min-width: 1920px;
+}
+
+.container {
+  width: 30%;
+  margin: 10px;
+}
+
+.med {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  width: 90%;
+  margin: 30px auto;
+}
+
+.med-info {
+  padding: 0 15px;
+  font-family: sans-serif;
+  font-size: 18px;
+}
+
+.app-content {
+  display: flex;
+  flex-direction: row;
+  align-content: space-between;
+}
+
+.search-bar {
+  width: 80%;
+  font-size: 18px;
+  padding: 5px;
+}

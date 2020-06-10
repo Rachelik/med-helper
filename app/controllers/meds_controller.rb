@@ -5,12 +5,21 @@ class MedsController < ApplicationController
   # GET /meds
   # GET /meds.json
   def index
-    @meds = Med.all
+    @meds = current_user.meds.all
+
+    respond_to do |format|
+      format.json {
+          render :json => @meds,
+          include: :user
+      }
+      format.html
+    end
   end
 
   # GET /meds/1
   # GET /meds/1.json
   def show
+    @med = Med.find(params[:id])
   end
 
   # GET /meds/new
@@ -70,6 +79,6 @@ class MedsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def med_params
-      params.require(:med).permit(:name, :indication, :frequency, :time, :dosage, :date_start, :duration, :user_id)
+      params.require(:med).permit(:name, :indication, :frequency, :time, :dosage, :date_start, :duration, :user_id, :date_end)
     end
 end
