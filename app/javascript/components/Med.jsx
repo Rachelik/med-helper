@@ -5,7 +5,7 @@ class Med extends React.Component {
   render() {
 
     return (
-      <div className="container">
+      <div>
         <h3>Med</h3>
         <div>
           {this.props.med}
