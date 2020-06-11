@@ -13,45 +13,54 @@
 
   <div class="field">
     <%= form.label :name %>
-    <%= form.text_field :name %>
+    <p><%= form.text_field :name %></p>
   </div>
+  <br>
 
   <div class="field">
     <%= form.label :indication %>
-    <%= form.text_field :indication %>
+    <p><%= form.select :indication, options_for_select([['Before food'], ['After food']]) %></p>
   </div>
+  <br>
 
   <div class="field">
-    <%= form.label :frequency %>
-    <%= form.number_field :frequency %>
+    <%= form.label 'Frequency' %>
+    <p><%= form.select :frequency, options_for_select([[1], [2], [3]])%><span> intake(s) per day</span></p>
   </div>
+  <br>
 
   <div class="field">
-    <%= form.label :time %>
-    <%= form.text_field :time %>
+    <%= form.label :time %><span> (if Frequency is 1 intake per day)</span>
+    <p><%= form.select :time, options_for_select([['Morning'],['Night']]) %></p>
   </div>
+  <br>
 
   <div class="field">
     <%= form.label :dosage %>
-    <%= form.text_field :dosage %>
+    <p><%= form.text_field :dosage %><span> per intake</span></p>
   </div>
+  <br>
 
   <div class="field">
     <%= form.label :date_start %>
-    <%= form.datetime_select :date_start %>
+    <p><%= form.datetime_select :date_start %></p>
   </div>
+  <br>
 
   <div class="field">
     <%= form.label :duration %>
-    <%= form.number_field :duration %>
+    <p><%= form.number_field :duration %><span> days</span></p>
   </div>
+  <br>
 
   <div class="field">
     <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
+    <p><%= form.collection_select :user_id, User.order(:email),:id,:email, include_blank: true %></p>
   </div>
+  <br>
 
   <div class="actions">
     <%= form.submit %>
   </div>
+
 <% end %>
