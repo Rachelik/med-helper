@@ -24,7 +24,7 @@
   <br>
 
   <div class="field">
-    <%= form.label 'Frequency' %>
+    <%= form.label :frequency %>
     <p><%= form.select :frequency, options_for_select([[1], [2], [3]])%><span> intake(s) per day</span></p>
   </div>
   <br>
@@ -49,7 +49,7 @@
 
   <div class="field">
     <%= form.label :duration %>
-    <p><%= form.number_field :duration %><span> days</span></p>
+    <p><%= form.number_field :duration %><span> day(s)</span></p>
   </div>
   <br>
 

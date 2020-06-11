@@ -156,14 +156,6 @@ class MedList extends React.Component {
               placeholderText="Click to select a date."
               dateFormat="MMMM dd, yyyy"
               isClearable
-
-
-              // selected={startDate}
-              // onChange={date => setStartDate(date)}
-              // peekNextMonth
-              // showMonthDropdown
-              // showYearDropdown
-              // dropdownMode="select"
             />
           </div>
           <div className="section breakfast-section">
