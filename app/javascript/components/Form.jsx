@@ -15,7 +15,7 @@ export default class Form extends React.Component {
       dosage: "",
       date_start: "",
       duration: "",
-      user_id: 1,
+      user_id: "",
       startDate: new Date()
     };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -73,8 +73,7 @@ export default class Form extends React.Component {
     const { name, indication, frequency, time, dosage, duration, user_id } = this.state;
 
     return (
-      <div>
-        <hr />
+      <div className="container-form">
         <form onSubmit = {this.handleSubmit}>
           <label> Name:<br/>
             <input
@@ -140,12 +139,14 @@ export default class Form extends React.Component {
               value={user_id}
             />
           </label><br/><br/>
-
-          <button type="submit">
-            Submit
-          </button>
+          <br/>
+          <div className="submit-btn">
+            <button type="submit">
+              Add
+            </button>
+          </div>
+          <br/>
         </form>
-        <hr />
       </div>
     );
   }
