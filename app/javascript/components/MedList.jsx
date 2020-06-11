@@ -2,6 +2,8 @@ import React from 'react'
 import axios from 'axios'
 import Med from './Med.jsx'
 import moment from 'moment'
+import DatePicker from 'react-datepicker'
+import "react-datepicker/dist/react-datepicker.css"
 
 class MedList extends React.Component {
 
@@ -15,18 +17,28 @@ class MedList extends React.Component {
         bf_lunch: [],
         aft_lunch: [],
         bf_dinner: [],
-        aft_dinner: []
+        aft_dinner: [],
+        startDate: new Date()
     };
   }
 
-  async componentDidMount() {
+  handleChange = date => {
+    this.setState({
+      meds: [],
+      bf_breakfast: [],
+      aft_breakfast: [],
+      bf_lunch: [],
+      aft_lunch: [],
+      bf_dinner: [],
+      aft_dinner: [],
+      startDate: date
+    });
     const runWhenDone = (response) => {
       let allData = response.data;
-      console.log(allData)
       allData.forEach(med => {
         let date_end = moment(med.date_start).add(med.duration, 'day')
-        console.log(moment(Date.now()) < date_end)
-        if(moment(Date.now()) >= moment(med.date_start) && moment(Date.now()) < date_end){
+        console.log(med.name, date_end.format(), med.frequency, med.indication)
+        if(this.state.startDate >= moment(med.date_start) && this.state.startDate < date_end){
           //check for breakfast
           if((med.frequency === 1 && med.time === 'Morning') || med.frequency === 2 || med.frequency === 3) {
             if (med.indication === 'Before food') {
@@ -60,18 +72,18 @@ class MedList extends React.Component {
         }
       })
     }
-    await axios.get('/meds.json').then(runWhenDone).catch((error) => {
+    axios.get('/meds.json').then(runWhenDone).catch((error) => {
       console.log("error", error)
     });
-  }
+  };
 
   render() {
     let bfBreakfast = this.state.bf_breakfast
       .map((med, index)=>{
         return (
-          <div className="med" key={med.id}>
+          <div className="med" key={index}>
             <div className="med-info">
-              <p>{med.name}, {med.dosage}, {med.indication}, {med.time}, {med.frequency}</p>
+              <p>{med.name}, {med.dosage}</p>
             </div>
           </div>
         );
@@ -80,9 +92,9 @@ class MedList extends React.Component {
     let aftBreakfast = this.state.aft_breakfast
       .map((med, index)=>{
         return (
-          <div className="med" key={med.id}>
+          <div className="med" key={index}>
             <div className="med-info">
-              <p>{med.name}, {med.dosage}, {med.indication}, {med.time}, {med.frequency}</p>
+              <p>{med.name}, {med.dosage}</p>
             </div>
           </div>
         );
@@ -91,9 +103,9 @@ class MedList extends React.Component {
     let bfLunch = this.state.bf_lunch
       .map((med, index)=>{
         return (
-          <div className="med" key={med.id}>
+          <div className="med" key={index}>
             <div className="med-info">
-              <p>{med.name}, {med.dosage}, {med.indication}, {med.time}, {med.frequency}</p>
+              <p>{med.name}, {med.dosage}</p>
             </div>
           </div>
         );
@@ -102,9 +114,9 @@ class MedList extends React.Component {
     let aftLunch = this.state.aft_lunch
       .map((med, index)=>{
         return (
-          <div className="med" key={med.id}>
+          <div className="med" key={index}>
             <div className="med-info">
-              <p>{med.name}, {med.dosage}, {med.indication}, {med.time}, {med.frequency}</p>
+              <p>{med.name}, {med.dosage}</p>
             </div>
           </div>
         );
@@ -113,9 +125,9 @@ class MedList extends React.Component {
     let bfDinner = this.state.bf_dinner
       .map((med, index)=>{
         return (
-          <div className="med" key={med.id}>
+          <div className="med" key={index}>
             <div className="med-info">
-              <p>{med.name}, {med.dosage}, {med.indication}, {med.time}, {med.frequency}</p>
+              <p>{med.name}, {med.dosage}</p>
             </div>
           </div>
         );
@@ -124,16 +136,36 @@ class MedList extends React.Component {
     let aftDinner = this.state.aft_dinner
       .map((med, index)=>{
         return (
-          <div className="med" key={med.id}>
+          <div className="med" key={index}>
             <div className="med-info">
-              <p>{med.name}, {med.dosage}, {med.indication}, {med.time}, {med.frequency}</p>
+              <p>{med.name}, {med.dosage}</p>
             </div>
           </div>
         );
     });
 
+
     return (
         <div className="container">
+          <div className="datePicker">
+            <DatePicker
+              selected={this.state.startDate}
+              onChange={this.handleChange}
+              className="rasta-stripes"
+              shouldCloseOnSelect={false}
+              placeholderText="Click to select a date."
+              dateFormat="MMMM dd, yyyy"
+              isClearable
+
+
+              // selected={startDate}
+              // onChange={date => setStartDate(date)}
+              // peekNextMonth
+              // showMonthDropdown
+              // showYearDropdown
+              // dropdownMode="select"
+            />
+          </div>
           <div className="section breakfast-section">
             <div className="med-list">
               {bfBreakfast}
