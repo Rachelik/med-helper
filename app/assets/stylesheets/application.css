@@ -14,22 +14,33 @@
  *= require_self
  */
 
-
-
 body {
-  background-color: lightgrey;
+  background-color: lightyellow;
   font-family: sans-serif;
-  padding: 20px;
-  margin: 20px auto;
-  min-width: 1920px;
+  margin: 10px auto;
+  max-width: 450px;
 }
 
-.app {
-  10px;
+.section {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 15px;
 }
 
-.container {
-  margin: 15px;
+.breakfast-section {
+  background-color: #ceebfd;
 }
 
+.lunch-section {
+  background-color: #ffe6ea;
+}
 
+.dinner-section {
+  background-color: #e5e5ff;
+}
+
+h3 {
+  text-align: center;
+  padding: 5px;
+  color: darkblue;
+}
