@@ -22,10 +22,11 @@ class MedList extends React.Component {
   async componentDidMount() {
     const runWhenDone = (response) => {
       let allData = response.data;
-
+      console.log(allData)
       allData.forEach(med => {
         let date_end = moment(med.date_start).add(med.duration, 'day')
-        if(Date.now() >= moment(med.date_start) && Date.now() < date_end){
+        console.log(moment(Date.now()) < date_end)
+        if(moment(Date.now()) >= moment(med.date_start) && moment(Date.now()) < date_end){
           //check for breakfast
           if((med.frequency === 1 && med.time === 'Morning') || med.frequency === 2 || med.frequency === 3) {
             if (med.indication === 'Before food') {
