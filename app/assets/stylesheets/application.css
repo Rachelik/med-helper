@@ -26,12 +26,15 @@ body {
   margin: 20px;
 }
 
-h2 {
+h1 {
   font-family: sans-serif;
   color: brown;
+  text-align: center;
 }
+
 .datePicker {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 .rasta-stripes {
@@ -40,6 +43,7 @@ h2 {
   padding: 8px;
   width: 250px;
   border-radius: 10px;
+  text-align: center;
 }
 
 .react-datepicker__current-month {
