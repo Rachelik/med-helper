@@ -77,10 +77,6 @@ class MedList extends React.Component {
     });
   };
 
-
-
-
-
   render() {
     let bfBreakfast = this.state.bf_breakfast
       .map((med, index)=>{
@@ -148,12 +144,26 @@ class MedList extends React.Component {
         );
     });
 
+
     return (
         <div className="container">
-          <div>
+          <div className="datePicker">
             <DatePicker
               selected={this.state.startDate}
               onChange={this.handleChange}
+              className="rasta-stripes"
+              shouldCloseOnSelect={false}
+              placeholderText="Click to select a date."
+              dateFormat="MMMM dd, yyyy"
+              isClearable
+
+
+              // selected={startDate}
+              // onChange={date => setStartDate(date)}
+              // peekNextMonth
+              // showMonthDropdown
+              // showYearDropdown
+              // dropdownMode="select"
             />
           </div>
           <div className="section breakfast-section">
