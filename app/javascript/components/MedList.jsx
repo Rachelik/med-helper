@@ -37,10 +37,8 @@ class MedList extends React.Component {
       let allData = response.data;
       allData.forEach(med => {
         let date_end = moment(med.date_start).add(med.duration, 'day')
-        this.setState({date_end: date_end})
+        console.log(med.name, date_end.format(), med.frequency, med.indication)
         if(this.state.startDate >= moment(med.date_start) && this.state.startDate < date_end){
-          console.log("adsfksjdf.    ",moment(this.state.startDate).format())
-          console.log(this.state.startDate < date_end)
           //check for breakfast
           if((med.frequency === 1 && med.time === 'Morning') || med.frequency === 2 || med.frequency === 3) {
             if (med.indication === 'Before food') {
