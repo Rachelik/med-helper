@@ -32,6 +32,8 @@ h1 {
   text-align: center;
 }
 
+/*datepicker formatting*/
+
 .datePicker {
   margin-bottom: 20px;
   text-align: center;
@@ -60,9 +62,12 @@ h1 {
   padding: 3px;
 }
 
+/*datepicker formatting*/
+
+/*show medList section*/
 .section {
   margin: 10px 0;
-  padding: 10px;
+  padding: 20px;
   border-radius: 15px;
 }
 
@@ -83,41 +88,45 @@ h3 {
   padding: 5px;
   color: darkblue;
 }
+/*show med section*/
 
+
+/*Form*/
 .container-form {
   background-color: #CCFFCC;
-  /*border: 1px solid;*/
   border-radius: 15px;
-  padding: 30px 15px;
+  padding: 40px 25px;
   box-shadow: box-shadow: 30px 30px;
 }
 
 label {
   font-size: 16px;
-  font-weight: bold;
+  /*font-weight: bold;*/
+  font-family: 'Open Sans';
 }
 
 input {
-  font-size: 16px;
-  padding: 5px;
-  margin: 10px 0;
-  width: 300px;
+  font-size: 14px;
+  padding: 3px;
+  margin: 8px 0;
+  width: 200px;
 }
 
 select {
-  font-size: 16px;
-  padding: 5px 20px;
-  margin: 10px 0;
+  font-size: 14px;
+  padding: 3px 20px;
+  margin: 8px 0;
 }
 
 span {
   font-weight: normal;
 }
 
+
 .submit-btn button {
   display: inline-block;
   padding: 15px 25px;
-  font-size: 24px;
+  font-size: 22px;
   cursor: pointer;
   text-align: center;
   text-decoration: none;
@@ -126,11 +135,6 @@ span {
   background-color: #4CAF50;
   border: none;
   border-radius: 15px;
-/*  border-radius: 20px 20px;
-  font-size: 16px;
-  padding: 25px;
-  background-color: orange;
-  font-weight: bold;*/
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
@@ -144,4 +148,13 @@ span {
 
 .submit-btn {
   text-align: center;
+}
+/*Form*/
+
+/*rails index table*/
+th, td {
+  text-align: left;
+  padding: 2px;
+  border-bottom: 2px solid grey;
+  border-right: 2px solid grey;
 }

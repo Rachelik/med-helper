@@ -45,28 +45,41 @@ export default class Form extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const url = "/meds.json";
-    const payload = {
-      name: this.state.name,
-      indication: this.state.indication,
-      frequency: this.state.frequency,
-      time: this.state.time,
-      dosage: this.state.dosage,
-      date_start: this.state.startDate,
-      duration: this.state.duration,
-      user_id: this.state.user_id
-    };
-    // const props = this.props;
+    if (this.state.name) {
+      const url = "/meds.json";
+      const payload = {
+        name: this.state.name,
+        indication: this.state.indication,
+        frequency: this.state.frequency,
+        time: this.state.time,
+        dosage: this.state.dosage,
+        date_start: this.state.startDate,
+        duration: this.state.duration,
+        user_id: this.state.user_id
+      };
+      // const props = this.props;
 
-    axios
-      .post(url, payload)
-      .then(function (response) {
-        // props.appendPost(response.data);
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+      axios
+        .post(url, payload)
+        .then(function (response) {
+          // props.appendPost(response.data);
+          let successMessage = document.querySelector('.success-message');
+          console.log(response.data)
+          successMessage.innerText = response.data.name + " added successfully";
+          // window.location = "/" //This line of code will redirect you once the submission is succeed. if hide then probably can use this.
+        })
+        .catch(function (error) {
+          console.log(error);
+          let successMessage = document.querySelector('.success-message');
+          successMessage.innerHTML = JSON.stringify(error);
+        });
+      event.preventDefault();
+      this.setState({name: '', indication: '', frequency: '', time: '', dosage: '', date_start: '', duration: '', user_id: ''})
+    } else {
+      let successMessage = document.querySelector('.success-message');
+      successMessage.innerHTML = JSON.stringify('Name cannot be empty.');
+      //NEED to check repeated content for the same date being submitted!!!!!!!!!!!!!!!!
+    }
   }
 
   render() {
@@ -81,6 +94,7 @@ export default class Form extends React.Component {
               name="name"
               onChange={this.onChange}
               value={name}
+
             />
           </label><br/><br/>
           <label> Indication:<br/>
@@ -97,7 +111,7 @@ export default class Form extends React.Component {
             </select>
             <span> intake(s) per day</span>
           </label><br/><br/>
-          <label> Time (if Frequency is 1 intake per day):<br/>
+          <label> Time <br/> (skip if Frequency is 1 intake per day):<br/>
             <select onChange={this.onChangeTimeSelect}>
               <option value='Morning'>Morning</option>
               <option value='Night'>Night</option>
@@ -113,6 +127,7 @@ export default class Form extends React.Component {
           </label><br/><br/>
           <label> Date start:<br/>
             <DatePicker
+              required
               selected={this.state.startDate}
               onChange={this.onChangeDate}
               className="rasta-stripes"
@@ -144,6 +159,10 @@ export default class Form extends React.Component {
             <button type="submit">
               Add
             </button>
+          </div>
+          <br/>
+          <div className="success-message">
+            <label></label>
           </div>
           <br/>
         </form>
