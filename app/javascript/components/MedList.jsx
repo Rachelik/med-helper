@@ -18,7 +18,7 @@ class MedList extends React.Component {
         aft_lunch: [],
         bf_dinner: [],
         aft_dinner: [],
-        startDate: new Date()
+        selectedDate: new Date()
     };
   }
 
@@ -31,14 +31,17 @@ class MedList extends React.Component {
       aft_lunch: [],
       bf_dinner: [],
       aft_dinner: [],
-      startDate: date
+      selectedDate: date
     });
     const runWhenDone = (response) => {
       let allData = response.data;
       allData.forEach(med => {
         let date_end = moment(med.date_start).add(med.duration, 'day')
         console.log(med.name, date_end.format(), med.frequency, med.indication)
-        if(this.state.startDate >= moment(med.date_start) && this.state.startDate < date_end){
+
+        //this.state.selectedDate (choose time to see what medicine to eat)
+        // med.date_start is to start date set by user form input.
+        if(this.state.selectedDate >= moment(med.date_start) && this.state.selectedDate < date_end){
           //check for breakfast
           if((med.frequency === 1 && med.time === 'Morning') || med.frequency === 2 || med.frequency === 3) {
             if (med.indication === 'Before food') {
@@ -149,7 +152,7 @@ class MedList extends React.Component {
         <div className="container">
           <div className="datePicker">
             <DatePicker
-              selected={this.state.startDate}
+              selected={this.state.selectedDate}
               onChange={this.handleChange}
               className="rasta-stripes"
               shouldCloseOnSelect={false}
