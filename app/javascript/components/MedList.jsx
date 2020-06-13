@@ -3,7 +3,8 @@ import axios from 'axios'
 import moment from 'moment'
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css"
-import Form from './Form'
+import Form from './Form.jsx'
+import Med from './Med.jsx'
 
 class MedList extends React.Component {
 
@@ -109,71 +110,46 @@ class MedList extends React.Component {
 
   render() {
     let bfBreakfast = this.state.bf_breakfast
-      .map((med, index)=>{
+      .map((med)=>{
         return (
-          <div className="med" key={index}>
-            <div className="med-info">
-              <p>{med.name}, {med.dosage}</p>
-            </div>
-          </div>
+          <Med medIndex={med.id} medName={med.name} medDosage={med.dosage} />
         );
     });
 
     let aftBreakfast = this.state.aft_breakfast
-      .map((med, index)=>{
+      .map((med)=>{
         return (
-          <div className="med" key={index}>
-            <div className="med-info">
-              <p>{med.name}, {med.dosage}</p>
-            </div>
-          </div>
+          <Med medIndex={med.id} medName={med.name} medDosage={med.dosage} />
         );
     });
 
     let bfLunch = this.state.bf_lunch
-      .map((med, index)=>{
+      .map((med)=>{
         return (
-          <div className="med" key={index}>
-            <div className="med-info">
-              <p>{med.name}, {med.dosage}</p>
-            </div>
-          </div>
+          <Med medIndex={med.id} medName={med.name} medDosage={med.dosage} />
         );
     });
 
     let aftLunch = this.state.aft_lunch
-      .map((med, index)=>{
+      .map((med)=>{
         return (
-          <div className="med" key={index}>
-            <div className="med-info">
-              <p>{med.name}, {med.dosage}</p>
-            </div>
-          </div>
+          <Med medIndex={med.id} medName={med.name} medDosage={med.dosage} />
         );
     });
 
     let bfDinner = this.state.bf_dinner
-      .map((med, index)=>{
+      .map((med)=>{
         return (
-          <div className="med" key={index}>
-            <div className="med-info">
-              <p>{med.name}, {med.dosage}</p>
-            </div>
-          </div>
+          <Med medIndex={med.id} medName={med.name} medDosage={med.dosage} />
         );
     });
 
     let aftDinner = this.state.aft_dinner
-      .map((med, index)=>{
+      .map((med)=>{
         return (
-          <div className="med" key={index}>
-            <div className="med-info">
-              <p>{med.name}, {med.dosage}</p>
-            </div>
-          </div>
+          <Med medIndex={med.id} medName={med.name} medDosage={med.dosage} />
         );
     });
-
 
     return (
         <div className="container">
