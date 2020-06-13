@@ -6,14 +6,19 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      meds: []
+      showForm: false
     }
   }
 
-  appendPost(med) {
-    const medArray = this.state.meds;
-    medArray.push(med);
-    this.setState({ meds: medArray })
+  //when click, will alternate showForm to false or true.
+  handleClick = (event) => {
+    this.state.showForm ? this.setState({showForm: false}) : this.setState({showForm: true});
+  }
+
+  showForm = () => {
+    return (
+      <Form />
+    )
   }
 
   render() {
@@ -22,11 +27,10 @@ class App extends React.Component {
         <h1>Med-helper</h1>
         <div>
           <MedList/>
-          <Form
-            appendPost={(med) => {
-              this.appendPost(med);
-            }}
-          />
+          <br/>
+          <button onClick={this.handleClick}>Add New</button>
+          <br/>
+          {this.state.showForm ? this.showForm() : null}
         </div>
       </div>
     )

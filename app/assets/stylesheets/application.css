@@ -42,10 +42,10 @@ h1 {
 .rasta-stripes {
   font-size: 16px;
   font-weight: bold;
-  padding: 6px;
-  width: 220px;
+  padding: 5px 20px;
+  width: 250px;
   border-radius: 10px;
-  text-align: center;
+  text-align: left;
 }
 
 .react-datepicker__current-month {

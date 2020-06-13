@@ -57,16 +57,12 @@ export default class Form extends React.Component {
         duration: this.state.duration,
         user_id: this.state.user_id
       };
-      // const props = this.props;
 
       axios
         .post(url, payload)
         .then(function (response) {
-          // props.appendPost(response.data);
           let successMessage = document.querySelector('.success-message');
-          console.log(response.data)
           successMessage.innerText = response.data.name + " added successfully";
-          // window.location = "/" //This line of code will redirect you once the submission is succeed. if hide then probably can use this.
         })
         .catch(function (error) {
           console.log(error);
@@ -94,17 +90,18 @@ export default class Form extends React.Component {
               name="name"
               onChange={this.onChange}
               value={name}
-
             />
           </label><br/><br/>
           <label> Indication:<br/>
-            <select onChange={this.onChangeIndicationSelect}>
+            <select onChange={this.onChangeIndicationSelect} defaultValue=''>
+              <option value="">Please choose</option>
               <option value='Before food'>Before food</option>
               <option value='After food'>After food</option>
             </select>
           </label><br/><br/>
           <label> Frequency:<br/>
-            <select onChange={this.onChangeFrequencySelect}>
+            <select onChange={this.onChangeFrequencySelect} defaultValue=''>
+              <option value="">Please choose</option>
               <option value='1'>1</option>
               <option value='2'>2</option>
               <option value='3'>3</option>
@@ -112,7 +109,8 @@ export default class Form extends React.Component {
             <span> intake(s) per day</span>
           </label><br/><br/>
           <label> Time <br/> (skip if Frequency is 1 intake per day):<br/>
-            <select onChange={this.onChangeTimeSelect}>
+            <select onChange={this.onChangeTimeSelect} defaultValue="">
+              <option value="">Please choose</option>
               <option value='Morning'>Morning</option>
               <option value='Night'>Night</option>
             </select>
@@ -131,9 +129,10 @@ export default class Form extends React.Component {
               selected={this.state.startDate}
               onChange={this.onChangeDate}
               className="rasta-stripes"
-              shouldCloseOnSelect={false}
               placeholderText="Click to select a date."
-              dateFormat="MMMM dd, yyyy"
+              timeInputLabel="Time:"
+              dateFormat="MMMM dd, yyyy h:mm aa"
+              showTimeInput
               isClearable
             />
           </label><br/><br/>
