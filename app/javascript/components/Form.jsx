@@ -163,7 +163,6 @@ export default class Form extends React.Component {
           <div className="success-message">
             <label></label>
           </div>
-          <br/>
         </form>
       </div>
     );

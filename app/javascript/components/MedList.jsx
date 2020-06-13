@@ -163,11 +163,6 @@ class MedList extends React.Component {
               isClearable
             />
           </div>
-          <div className="btn add-new-btn">
-            <button onClick={this.handleClick}>Add New</button>
-          </div>
-          <br/>
-          {this.state.showForm ? this.showForm() : null}
           <div className="section breakfast-section">
             <div className="med-list">
               {bfBreakfast}
@@ -203,6 +198,11 @@ class MedList extends React.Component {
               {aftDinner}
             </div>
           </div>
+
+          <div className="btn">
+            <button onClick={this.handleClick}>Add New</button>
+          </div>
+          {this.state.showForm ? this.showForm() : null}
         </div>
     );
   }

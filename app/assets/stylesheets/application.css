@@ -35,16 +35,16 @@ h1 {
 /*datepicker formatting*/
 
 .datePicker {
-  margin-bottom: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   text-align: center;
 }
 
 .rasta-stripes {
   font-size: 16px;
-  font-weight: bold;
   padding: 5px 20px;
   width: 250px;
-  border-radius: 10px;
+  border-radius: 6px;
   text-align: left;
 }
 
@@ -61,7 +61,6 @@ h1 {
   font-size: 16px;
   padding: 3px;
 }
-
 /*datepicker formatting*/
 
 /*show medList section*/
@@ -93,29 +92,31 @@ h3 {
 
 /*Form*/
 .container-form {
-  background-color: #CCFFCC;
+  background-color: #CCEECC;
   border-radius: 15px;
-  padding: 40px 25px;
+  padding: 25px 25px;
   box-shadow: box-shadow: 30px 30px;
+  margin-top: 10px;
+  margin-bottom: 30px;
 }
 
 label {
   font-size: 16px;
   /*font-weight: bold;*/
-  font-family: 'Open Sans';
+  font-family: 'Arial';
 }
 
 input {
   font-size: 14px;
   padding: 3px;
-  margin: 8px 0;
+  margin: 5px 0;
   width: 200px;
 }
 
 select {
   font-size: 14px;
   padding: 3px 20px;
-  margin: 8px 0;
+  margin: 5px 0;
 }
 
 span {
@@ -125,8 +126,8 @@ span {
 
 .btn button {
   display: inline-block;
-  padding: 15px 25px;
-  font-size: 22px;
+  padding: 10px 15px;
+  font-size: 20px;
   cursor: pointer;
   text-align: center;
   text-decoration: none;
@@ -148,10 +149,6 @@ span {
 
 .btn {
   text-align: center;
-}
-
-.add-new-btn {
-  text-align: right;
 }
 /*Form*/
 
