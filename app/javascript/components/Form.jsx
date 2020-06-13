@@ -154,7 +154,7 @@ export default class Form extends React.Component {
             />
           </label><br/><br/>
           <br/>
-          <div className="submit-btn">
+          <div className="btn">
             <button type="submit">
               Add
             </button>

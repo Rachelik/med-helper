@@ -3,6 +3,7 @@ import axios from 'axios'
 import moment from 'moment'
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css"
+import Form from './Form'
 
 class MedList extends React.Component {
 
@@ -17,7 +18,8 @@ class MedList extends React.Component {
         aft_lunch: [],
         bf_dinner: [],
         aft_dinner: [],
-        selectedDate: new Date()
+        selectedDate: new Date(),
+        showForm: false
     };
   }
 
@@ -93,6 +95,17 @@ class MedList extends React.Component {
       console.log("error", error)
     });
   };
+
+  //when click, will alternate showForm to false or true.
+  handleClick = (event) => {
+    this.state.showForm ? this.setState({showForm: false}) : this.setState({showForm: true});
+  }
+
+  showForm = () => {
+    return (
+      <Form />
+    )
+  }
 
   render() {
     let bfBreakfast = this.state.bf_breakfast
@@ -174,6 +187,11 @@ class MedList extends React.Component {
               isClearable
             />
           </div>
+          <div className="btn add-new-btn">
+            <button onClick={this.handleClick}>Add New</button>
+          </div>
+          <br/>
+          {this.state.showForm ? this.showForm() : null}
           <div className="section breakfast-section">
             <div className="med-list">
               {bfBreakfast}

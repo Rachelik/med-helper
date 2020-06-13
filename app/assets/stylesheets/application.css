@@ -123,7 +123,7 @@ span {
 }
 
 
-.submit-btn button {
+.btn button {
   display: inline-block;
   padding: 15px 25px;
   font-size: 22px;
@@ -138,16 +138,20 @@ span {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
-.submit-btn button:hover {background-color: #3e8e41}
+.btn button:hover {background-color: #3e8e41}
 
-.submit-btn button:active {
+.btn button:active {
   background-color: #3e8e41;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
 
-.submit-btn {
+.btn {
   text-align: center;
+}
+
+.add-new-btn {
+  text-align: right;
 }
 /*Form*/
 
