@@ -24,6 +24,7 @@ class MedList extends React.Component {
     };
   }
 
+  //sort meds fn to its category
   sortDataFn = (medsJsonData) => {
     medsJsonData.forEach(med => {
       let date_end = moment(med.date_start).add(med.duration, 'day')
@@ -66,6 +67,7 @@ class MedList extends React.Component {
     })
   };
 
+  //display today on refresh
   componentDidMount() {
     const runWhenDone = (response) => {
       let allData = response.data;
@@ -103,6 +105,7 @@ class MedList extends React.Component {
   }
 
   showForm = () => {
+    console.log(this)
     return (
       <Form />
     )

@@ -108,7 +108,7 @@ export default class Form extends React.Component {
             </select>
             <span> intake(s) per day</span>
           </label><br/><br/>
-          <label> Time <br/> (skip if Frequency is 1 intake per day):<br/>
+          <label> Time <br/> (Choose Morning or Night, if Frequency is 1 intake per day):<br/>
             <select onChange={this.onChangeTimeSelect} defaultValue="">
               <option value="">Please choose</option>
               <option value='Morning'>Morning</option>
