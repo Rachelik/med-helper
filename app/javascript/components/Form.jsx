@@ -14,8 +14,7 @@ export default class Form extends React.Component {
       time: "",
       dosage: "",
       date_start: new Date(),
-      duration: "",
-      user_id: ""
+      duration: ""
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -43,8 +42,7 @@ export default class Form extends React.Component {
     })
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
+  handleSubmit = async (event) => {
     if (this.state.name) {
       const url = "/meds.json";
       const payload = {
@@ -60,7 +58,7 @@ export default class Form extends React.Component {
       const token =
             document.querySelector('[name=csrf-token]').content
       axios.defaults.headers.common['X-CSRF-TOKEN'] = token
-      axios
+      await axios
         .post(url, payload)
         .then(function (response) {
           let successMessage = document.querySelector('.success-message');
@@ -72,11 +70,10 @@ export default class Form extends React.Component {
           successMessage.innerHTML = JSON.stringify(error);
         });
       event.preventDefault();
-      this.setState({name: '', indication: '', frequency: '', time: '', dosage: '', date_start: new Date(), duration: '', user_id: ''})
+      this.setState({name: '', indication: '', frequency: '', time: '', dosage: '', date_start: new Date(), duration: ''})
     } else {
       let successMessage = document.querySelector('.success-message');
       successMessage.innerHTML = JSON.stringify('Name cannot be empty.');
-      //NEED to check repeated content for the same date being submitted!!!!!!!!!!!!!!!!
     }
   }
 
@@ -146,14 +143,6 @@ export default class Form extends React.Component {
             /><span> day(s)</span>
           </label><br/><br/>
 
-          <label> User:<br/>
-            <input
-              type="number"
-              name="user_id"
-              onChange={this.onChange}
-              value={user_id}
-            />
-          </label><br/><br/>
           <br/>
           <div className="btn">
             <button type="submit">

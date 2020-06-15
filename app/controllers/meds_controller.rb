@@ -81,7 +81,7 @@ class MedsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def med_params
-      params.require(:med).permit(:name, :indication, :frequency, :time, :dosage, :date_start, :duration, :user_id)
+      params.require(:med).permit(:name, :indication, :frequency, :time, :dosage, :date_start, :duration)
     end
 
 

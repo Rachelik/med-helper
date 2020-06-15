@@ -47,7 +47,6 @@ export default class EditForm extends React.Component {
   }
 
   handleSaveEdit = async (event) => {
-    event.preventDefault();
     if (this.state.name) {
       const url = "/meds/"+this.props.id+".json";
 
@@ -58,8 +57,7 @@ export default class EditForm extends React.Component {
         time: this.state.time,
         dosage: this.state.dosage,
         date_start: this.state.date_start,
-        duration: this.state.duration,
-        user_id: this.state.user_id
+        duration: this.state.duration
       };
       const token = document.querySelector('[name=csrf-token]').content
           axios.defaults.headers.common['X-CSRF-TOKEN'] = token
@@ -75,8 +73,7 @@ export default class EditForm extends React.Component {
           let successMessage = document.querySelector('.success-message');
           successMessage.innerHTML = JSON.stringify(error);
         });
-      // event.preventDefault();
-      // this.setState({name: '', indication: '', frequency: '', time: '', dosage: '', date_start: '', duration: '', user_id: ''})
+
     } else {
       let successMessage = document.querySelector('.success-message');
       successMessage.innerHTML = JSON.stringify('Name cannot be empty.');
@@ -84,7 +81,7 @@ export default class EditForm extends React.Component {
   }
 
   render() {
-    const { name, indication, frequency, time, dosage, date_start, duration, user_id } = this.state;
+    const { name, indication, frequency, time, dosage, date_start, duration } = this.state;
 
     return (
       <div className="container-form">
@@ -149,14 +146,6 @@ export default class EditForm extends React.Component {
             /><span> day(s)</span>
           </label><br/><br/>
 
-          <label> User:<br/>
-            <input
-              type="number"
-              name="user_id"
-              onChange={this.onChange}
-              value={user_id}
-            />
-          </label><br/><br/>
           <br/>
           <div className="btn">
             <button type="submit">

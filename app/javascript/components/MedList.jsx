@@ -161,22 +161,17 @@ class MedList extends React.Component {
     )
   }
 
-  deleteClickHandler = (event) => {
+  deleteClickHandler = async (event) => {
     const sure = window.confirm('Are you sure?');
     if(sure) {
       const url = "/meds/"+event.target.value;
       const token = document.querySelector('[name=csrf-token]').content
       axios.defaults.headers.common['X-CSRF-TOKEN'] = token
-      axios
+      await axios
         .delete(url)
         .then((response) => {
-          alert('Medicine deleted');
-          this.setState({showAll: false})
+          window.location = "/"
         })
-        .catch((error) => {
-            console.log('Error', error.message);
-        })
-
       }
     }
 
