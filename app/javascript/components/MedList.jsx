@@ -71,6 +71,7 @@ class MedList extends React.Component {
   componentDidMount() {
     const runWhenDone = (response) => {
       let allData = response.data;
+      this.setState({meds: allData})
       this.sortDataFn(allData)
     }
     axios.get('/meds.json').then(runWhenDone).catch((error) => {
@@ -87,11 +88,14 @@ class MedList extends React.Component {
       aft_lunch: [],
       bf_dinner: [],
       aft_dinner: [],
-      selectedDate: date
+      selectedDate: date,
+      showForm: false,
+      showAll: false
     });
 
     const runWhenDoneSelect = (response) => {
       let allData = response.data;
+      this.setState({meds: allData})
       this.sortDataFn(allData)
     }
     axios.get('/meds.json').then(runWhenDoneSelect).catch((error) => {
@@ -104,14 +108,26 @@ class MedList extends React.Component {
     this.state.showForm ? this.setState({showForm: false}) : this.setState({showForm: true});
   }
 
+  showAllClick = (event) => {
+    this.state.showAll ? this.setState({showAll: false}) : this.setState({showAll: true});
+  }
+
   showForm = () => {
-    console.log(this)
     return (
       <Form />
     )
   }
 
   render() {
+
+    let showAllList = this.state.meds.map((med) => {
+      return (
+        <div key={med.id}>
+          <p>{med.name}</p>
+        </div>
+      )
+    })
+
     let bfBreakfast = this.state.bf_breakfast
       .map((med)=>{
         return (
@@ -205,7 +221,16 @@ class MedList extends React.Component {
           <div className="btn">
             <button onClick={this.handleClick}>Add New</button>
           </div>
+
+          <button onClick={this.showAllClick}>Show All</button>
+
+
+
+
           {this.state.showForm ? this.showForm() : null}
+          <div>
+            {this.state.showAll ? showAllList : null}
+          </div>
         </div>
     );
   }

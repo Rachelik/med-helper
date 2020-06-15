@@ -15,7 +15,9 @@ class Med extends React.Component {
     };
   }
 
+  //show med information (Date range, duration, indication, intakes)
   clickShow = (props) => {
+    event.preventDefault();
     const url = "/meds/"+this.props.medIndex+".json";
     const displayMedInfo = (response) => {
       this.setState({med: response.data});
