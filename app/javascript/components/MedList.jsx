@@ -5,6 +5,7 @@ import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css"
 import Form from './Form.jsx'
 import Med from './Med.jsx'
+import EditForm from './Edit.jsx'
 
 class MedList extends React.Component {
 
@@ -27,14 +28,26 @@ class MedList extends React.Component {
   //sort meds fn to its category
   sortDataFn = (medsJsonData) => {
     medsJsonData.forEach(med => {
-      let date_end = moment(med.date_start).add(med.duration, 'day')
-      console.log(med.name, date_end.format(), med.frequency, med.indication)
+      let dateStart = moment(med.date_start).startOf('day').format()
+      let datetimeEnd = moment(med.date_start).add(med.duration, 'day')
+      let dateEnd = moment(datetimeEnd).startOf('day').format()
+      let dateSelected = moment(this.state.selectedDate).startOf('day').format()
+      console.log(med.name, dateEnd, med.frequency, med.indication)
 
       //this.state.selectedDate (choose time to see what medicine to eat)
+      console.log("date_selected    ", dateSelected)
+      console.log("date_start    ", dateStart)
+      console.log("date_end    ", dateEnd)
       // med.date_start is to start date set by user form input.
-      if(this.state.selectedDate >= moment(med.date_start) && this.state.selectedDate < date_end){
+      if(dateSelected >= dateStart && dateSelected <= dateEnd){
         //check for breakfast
-        if((med.frequency === 1 && med.time === 'Morning') || med.frequency === 2 || med.frequency === 3) {
+        let timeMedStart = moment(med.date_start).format('HH:mm')
+        let lunchStart = moment("10:00", "HH:mm").format("HH:mm")
+        let dinnerStart = moment("16:00", "HH:mm").format("HH:mm")
+        console.log("time to eat med", timeMedStart)
+        console.log("med for breakfast cut-off time", lunchStart)
+        console.log("med for lunch cut-off time", dinnerStart)
+        if((med.frequency === 1 && med.time === 'Morning') || ((dateSelected === dateStart && timeMedStart <= lunchStart) && (med.frequency === 2 || med.frequency === 3)) || (dateSelected > dateStart && dateSelected <= dateEnd && (med.frequency === 2 || med.frequency === 3))) {
           if (med.indication === 'Before food') {
             let medsBfBreakfast = [med, ...this.state.bf_breakfast];
             this.setState({bf_breakfast: medsBfBreakfast})
@@ -43,8 +56,10 @@ class MedList extends React.Component {
             this.setState({aft_breakfast: medsAftBreakfast})
           }
         }
+
+        //med for lunch cut off at 4pm (upper limit), lower limit is breakfastCutOff
         //check for dinner
-        if ((med.frequency === 1 && med.time === 'Night') || med.frequency === 2 || med.frequency === 3) {
+        if ((med.frequency === 1 && med.time === 'Night') || ((dateSelected === dateStart && timeMedStart <= dinnerStart) && (med.frequency === 2 || med.frequency === 3)) || ((dateSelected > dateStart && dateSelected <= dateEnd) && (med.frequency === 2 || med.frequency === 3))) {
           if (med.indication === 'Before food') {
             let medsBfDinner = [med, ...this.state.bf_dinner];
             this.setState({bf_dinner: medsBfDinner})
@@ -53,9 +68,10 @@ class MedList extends React.Component {
             this.setState({aft_dinner: medsAftDinner})
           }
         }
-        //check for lunch
-        if (med.frequency === 3) {
-          if (med.indication === 'Before food') {
+
+        //check for lunch (cut off is > breakfastCutOff at 10am and <= lunchCutOff at 4pm)
+        if ((med.frequency === 3 && dateSelected === dateStart && ((timeMedStart > lunchStart && timeMedStart < dinnerStart) || (timeMedStart < lunchStart))) || (med.frequency === 3 && dateSelected > dateStart && dateSelected <= dateEnd)) {
+          if (med.indication === 'Before food'){
             let medsBfLunch = [med, ...this.state.bf_lunch];
             this.setState({bf_lunch: medsBfLunch})
           } else if (med.indication === 'After food') {
@@ -63,6 +79,7 @@ class MedList extends React.Component {
             this.setState({aft_lunch: medsAftLunch})
           }
         }
+
       }
     })
   };
@@ -79,6 +96,7 @@ class MedList extends React.Component {
     });
   };
 
+  //when selected date change, this will reset previous data and reassign.
   handleChange = date => {
     this.setState({
       meds: [],
@@ -90,7 +108,9 @@ class MedList extends React.Component {
       aft_dinner: [],
       selectedDate: date,
       showForm: false,
-      showAll: false
+      showAll: false,
+      beingEdited: false,
+      med: []
     });
 
     const runWhenDoneSelect = (response) => {
@@ -118,15 +138,92 @@ class MedList extends React.Component {
     )
   }
 
-  render() {
+  //when Edit button in Index clicked, get data and trigger edit form
+  editClickHandler = (event) => {
+    const url = "/meds/"+event.target.value+'.json';
+    const runWhenEdit = (response) => {
+      let medBfEditData = response.data
+      this.setState({med: medBfEditData})
+      this.state.beingEdited ? this.setState({beingEdited: false}) : this.setState({beingEdited: true});
+      this.setState({showAll: false})
+    }
+    axios.get(url).then(runWhenEdit).catch((error) => {
+      console.log("error", error)
+    });
+  }
 
+  showEditForm = () => {
+    const { id, name, indication, frequency, time, dosage, date_start, duration, user_id } = this.state.med;
+    // console.log(this.state.med)
+
+    return (
+      <EditForm id={id} name={name} indication={indication} frequency={frequency} time={time} dosage={dosage} date_start={date_start} duration={duration} user_id={user_id} />
+    )
+  }
+
+  deleteClickHandler = (event) => {
+    const sure = window.confirm('Are you sure?');
+    if(sure) {
+      const url = "/meds/"+event.target.value;
+      const token = document.querySelector('[name=csrf-token]').content
+      axios.defaults.headers.common['X-CSRF-TOKEN'] = token
+      axios
+        .delete(url)
+        .then((response) => {
+          alert('Medicine deleted');
+          this.setState({showAll: false})
+        })
+        .catch((error) => {
+            console.log('Error', error.message);
+        })
+
+      }
+    }
+
+
+  showAllList = () => {
     let showAllList = this.state.meds.map((med) => {
-      return (
-        <div key={med.id}>
-          <p>{med.name}</p>
-        </div>
-      )
+      if(med.frequency === 1) {
+        return (
+          <div className="card" key={med.id}>
+            <h4>{med.name}</h4>
+            <div className="card-info">
+              <p>Indication: {med.indication}</p>
+              <p>Frequency: {med.frequency} intake(s) per day</p>
+              <p>Time: {med.time}</p>
+              <p>Dosage: {med.dosage}</p>
+              <p>Date start: {moment(med.date_start).format('LLL')}</p>
+              <p>Duration: {med.duration} day(s)</p>
+              <button onClick={this.editClickHandler} value={med.id}>Edit</button>
+              <button onClick={this.deleteClickHandler} value={med.id}>Delete</button>
+            </div>
+          </div>
+        )
+      } else {
+        return (
+          <div className="card" key={med.id}>
+            <h4>{med.name}</h4>
+            <div className="card-info">
+              <p>Indication: {med.indication}</p>
+              <p>Frequency: {med.frequency} intake(s) per day</p>
+              <p>Dosage: {med.dosage}</p>
+              <p>Date start: {moment(med.date_start).format('LLL')}</p>
+              <p>Duration: {med.duration} day(s)</p>
+              <button onClick={this.editClickHandler} value={med.id}>Edit</button>
+              <button onClick={this.deleteClickHandler} value={med.id}>Delete</button>
+            </div>
+          </div>
+        )
+      }
     })
+    return (
+      <div className="section index-section">
+        {showAllList}
+      </div>
+    )
+  }
+
+  render() {
 
     let bfBreakfast = this.state.bf_breakfast
       .map((med)=>{
@@ -222,15 +319,15 @@ class MedList extends React.Component {
             <button onClick={this.handleClick}>Add New</button>
           </div>
 
-          <button onClick={this.showAllClick}>Show All</button>
-
-
-
-
           {this.state.showForm ? this.showForm() : null}
-          <div>
-            {this.state.showAll ? showAllList : null}
-          </div>
+
+          <button onClick={this.showAllClick}>Index</button>
+
+          {this.state.showAll ? this.showAllList() : null}
+
+          {this.state.beingEdited ? this.showEditForm() : null}
+
+
         </div>
     );
   }

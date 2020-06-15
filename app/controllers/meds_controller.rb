@@ -1,6 +1,6 @@
 class MedsController < ApplicationController
-  skip_before_action :verify_authenticity_token
-  before_action :authenticate_user!
+  # skip_before_action :verify_authenticity_token
+  before_action :authenticate_user!, except: [:edit, :update, :destroy]
   before_action :set_med, only: [:show, :edit, :update, :destroy]
 
   # GET /meds
@@ -36,6 +36,7 @@ class MedsController < ApplicationController
   # POST /meds.json
   def create
     @med = Med.new(med_params)
+    @med.user = current_user
 
     respond_to do |format|
       if @med.save
@@ -80,6 +81,13 @@ class MedsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def med_params
-      params.require(:med).permit(:name, :indication, :frequency, :time, :dosage, :date_start, :duration, :user_id, :date_end)
+      params.require(:med).permit(:name, :indication, :frequency, :time, :dosage, :date_start, :duration, :user_id)
+    end
+
+
+    def authenticate_user!
+      if user_signed_in?
+        @current_user = current_user
+      end
     end
 end

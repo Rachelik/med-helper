@@ -33,7 +33,6 @@ h1 {
 }
 
 /*datepicker formatting*/
-
 .datePicker {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -41,8 +40,8 @@ h1 {
 }
 
 .rasta-stripes {
-  font-size: 16px;
-  padding: 5px 20px;
+  font-size: 14px;
+  padding: 5px 15px;
   width: 250px;
   border-radius: 6px;
   text-align: left;
@@ -53,13 +52,11 @@ h1 {
 }
 
 .react-datepicker__day-name{
-  font-size: 16px;
-  padding: 3px;
+  font-size: 14px;
 }
 
 .react-datepicker__day{
-  font-size: 16px;
-  padding: 3px;
+  font-size: 14px;
 }
 /*datepicker formatting*/
 
@@ -80,6 +77,10 @@ h1 {
 
 .dinner-section {
   background-color: #e5e5ff;
+}
+
+.index-section {
+  background-color: lightgreen;
 }
 
 h3 {
@@ -169,6 +170,10 @@ th, td {
   position: relative;
 }
 
+.med-info a {
+  text-decoration: none;
+}
+
 .edit-btn {
   font-size: 16px;
   position: absolute;
@@ -180,4 +185,14 @@ th, td {
 .edit-btn:active {
   box-shadow: 0 5px #666;
   transform: translateY(4px);
+}
+
+
+/*Index section*/
+.card {
+  margin: 5px 0;
+}
+
+.card-info {
+  padding-left: 20px;
 }
