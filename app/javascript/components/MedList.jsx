@@ -2,7 +2,6 @@ import React from 'react'
 import axios from 'axios'
 import moment from 'moment'
 import DatePicker from 'react-datepicker'
-require('react-datepicker/dist/react-datepicker.css')
 import Form from './Form.jsx'
 import Med from './Med.jsx'
 import EditForm from './Edit.jsx'

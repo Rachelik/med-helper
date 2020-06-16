@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import DatePicker from 'react-datepicker'
-require('react-datepicker/dist/react-datepicker.css')
+
 
 export default class Form extends React.Component {
   constructor() {
