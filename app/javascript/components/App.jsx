@@ -1,5 +1,5 @@
-import React from 'react'
-import MedList from './MedList.jsx'
+import React from 'react';
+import MedList from './MedList.jsx';
 
 
 class App extends React.Component {

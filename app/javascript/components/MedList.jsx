@@ -195,8 +195,8 @@ class MedList extends React.Component {
               <p>Dosage: {med.dosage}</p>
               <p>Date start: {moment(med.date_start).format('LLL')}</p>
               <p>Duration: {med.duration} day(s)</p>
-              <button onClick={this.editClickHandler} value={med.id}>Edit</button>
-              <button onClick={this.deleteClickHandler} value={med.id}>Delete</button>
+              <button onClick={this.editClickHandler} className="modification-btn" value={med.id}>Edit</button>
+              <button onClick={this.deleteClickHandler} className="modification-btn" value={med.id}>Delete</button>
             </div>
           </div>
         )
@@ -210,8 +210,8 @@ class MedList extends React.Component {
               <p>Dosage: {med.dosage}</p>
               <p>Date start: {moment(med.date_start).format('LLL')}</p>
               <p>Duration: {med.duration} day(s)</p>
-              <button onClick={this.editClickHandler} value={med.id}>Edit</button>
-              <button onClick={this.deleteClickHandler} value={med.id}>Delete</button>
+              <button onClick={this.editClickHandler} className="modification-btn" value={med.id}>Edit</button>
+              <button onClick={this.deleteClickHandler} className="modification-btn" value={med.id}>Delete</button>
             </div>
           </div>
         )
@@ -321,7 +321,7 @@ class MedList extends React.Component {
 
           {this.state.showForm ? this.showForm() : null}
 
-          <button onClick={this.showAllClick}>Index</button>
+          <button onClick={this.showAllClick} className="modification-btn">Index</button>
 
           {this.state.showAll || (this.state.beingDeleted && this.state.showAll) ? this.showAllList() : null}
 

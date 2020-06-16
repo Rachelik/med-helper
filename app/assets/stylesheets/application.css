@@ -135,7 +135,7 @@ span {
   color: #fff;
   background-color: #4CAF50;
   border: none;
-  border-radius: 15px;
+  border-radius: 8px;
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
@@ -186,12 +186,57 @@ th, td {
   transform: translateY(4px);
 }
 
+.modification-btn {
+  border: 3px solid green;
+  padding: 3px 15px;
+  border-radius: 8px;
+  font-size: 16px;
+  margin-top: 20px;
+  margin-right: 5px;
+}
 
-/*Index section*/
+
+/*drop down click section*/
 .card {
   margin: 5px 0;
 }
 
 .card-info {
   padding-left: 20px;
+}
+
+
+/* login page */
+.logging {
+  margin: 30px;
+  text-align: right;
+}
+
+a.button {
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+
+  text-decoration: none;
+  color: initial;
+  border: 3px solid black;
+  padding: 5px 10px;
+  border-radius: 5px 5px;
+}
+
+.login-page {
+  margin: 30px;
+}
+
+#user_remember_me {
+  width: 50px;
+  text-align: left;
+}
+
+.field {
+  text-align: left;
+}
+
+.login-login-button {
+
 }

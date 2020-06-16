@@ -80,7 +80,6 @@ class MedsController < ApplicationController
       params.require(:med).permit(:name, :indication, :frequency, :time, :dosage, :date_start, :duration)
     end
 
-
     def authenticate_user!
       if user_signed_in?
         @current_user = current_user
