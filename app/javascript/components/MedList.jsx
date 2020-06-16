@@ -268,7 +268,6 @@ class MedList extends React.Component {
             <DatePicker
               selected={this.state.selectedDate}
               onChange={this.handleChange}
-              className="rasta-stripes"
               placeholderText="Click to select a date."
               dateFormat="MMMM dd, yyyy"
               isClearable
