@@ -89,17 +89,18 @@ export default class Form extends React.Component {
               name="name"
               onChange={this.onChange}
               value={name}
+              required
             />
           </label><br/><br/>
           <label> Indication:<br/>
-            <select onChange={this.onChangeIndicationSelect} defaultValue=''>
+            <select onChange={this.onChangeIndicationSelect} defaultValue='' required>
               <option value="">Please choose</option>
               <option value='Before food'>Before food</option>
               <option value='After food'>After food</option>
             </select>
           </label><br/><br/>
           <label> Frequency:<br/>
-            <select onChange={this.onChangeFrequencySelect} defaultValue=''>
+            <select onChange={this.onChangeFrequencySelect} defaultValue='' required>
               <option value="">Please choose</option>
               <option value='1'>1</option>
               <option value='2'>2</option>
@@ -120,6 +121,7 @@ export default class Form extends React.Component {
               name="dosage"
               onChange={this.onChange}
               value={dosage}
+              required
             /><span> per intake</span>
           </label><br/><br/>
           <label> Date start:<br/>
@@ -139,6 +141,7 @@ export default class Form extends React.Component {
               name="duration"
               onChange={this.onChange}
               value={duration}
+              required
             /><span> day(s)</span>
           </label><br/><br/>
 
