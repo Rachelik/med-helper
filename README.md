@@ -1,7 +1,7 @@
 # Med-helper App
 
 ###### An embedded screenshot of the app
-![Main page of Med-helper](https://drive.google.com/file/d/14amS98fDgdLjD38KxsZIfdinlbnlMDFK/view?usp=sharing)
+[Main page of Med-helper](https://drive.google.com/file/d/14amS98fDgdLjD38KxsZIfdinlbnlMDFK/view?usp=sharing)
 
 
 ###### Explanations of the technologies used
@@ -41,7 +41,7 @@ As a medication taker, I need a reminder/an overview of when I need to take my m
 
 ###### wireframes – sketches of major views / interfaces in your application
 
-![Main page of Med-helper](https://drive.google.com/file/d/1wNibl3FsDJczmaKAxZqwa9KVETFlwyzl/view?usp=sharing)
+![Wireframe for Med-helper](https://drive.google.com/file/d/1wNibl3FsDJczmaKAxZqwa9KVETFlwyzl/view?usp=sharing)
 
 ###### Descriptions of any unsolved problems or major hurdles you had to overcome
 **unsolved problems**
