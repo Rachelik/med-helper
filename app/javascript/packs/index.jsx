@@ -5,6 +5,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from "../components/App"
+import 'react-datepicker/dist/react-datepicker-cssmodules.min.css'
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
