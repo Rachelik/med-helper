@@ -46,7 +46,7 @@ class MedList extends React.Component {
         console.log("time to eat med", timeMedStart)
         console.log("med for breakfast cut-off time", lunchStart)
         console.log("med for lunch cut-off time", dinnerStart)
-        if((med.frequency === 1 && med.time === 'Morning' && (dateSelected === dateStart && timeMedStart <= lunchStart)) || (med.frequency === 1 && med.time === 'Morning' && dateSelected > dateStart && dateSelected <= dateEnd) || ((dateSelected === dateStart && timeMedStart <= lunchStart) && (med.frequency === 2 || med.frequency === 3)) || (dateSelected > dateStart && dateSelected <= dateEnd && (med.frequency === 2 || med.frequency === 3))) {
+        if((med.frequency === 1 && med.time === 'Morning' && (dateSelected === dateStart && timeMedStart <= lunchStart)) || (med.frequency === 1 && med.time === 'Morning' && dateSelected > dateStart && dateSelected < dateEnd) || ((dateSelected === dateStart && timeMedStart <= lunchStart) && (med.frequency === 2 || med.frequency === 3)) || (dateSelected > dateStart && dateSelected < dateEnd && (med.frequency === 2 || med.frequency === 3))) {
           if (med.indication === 'Before food') {
             let medsBfBreakfast = [med, ...this.state.bf_breakfast];
             this.setState({bf_breakfast: medsBfBreakfast})
@@ -58,7 +58,7 @@ class MedList extends React.Component {
 
         //med for lunch cut off at 4pm (upper limit), lower limit is breakfastCutOff
         //check for dinner
-        if ((med.frequency === 1 && med.time === 'Night' && (dateSelected === dateStart && timeMedStart <= dinnerStart)) || (med.frequency === 1 && med.time === 'Night' && (dateSelected > dateStart && dateSelected <= dateEnd)) || ((dateSelected === dateStart && timeMedStart <= dinnerStart) && (med.frequency === 2 || med.frequency === 3)) || ((dateSelected > dateStart && dateSelected <= dateEnd) && (med.frequency === 2 || med.frequency === 3))) {
+        if ((med.frequency === 1 && med.time === 'Night' && (dateSelected === dateStart && timeMedStart <= dinnerStart)) || (med.frequency === 1 && med.time === 'Night' && (dateSelected > dateStart && dateSelected < dateEnd)) || ((dateSelected === dateStart && timeMedStart <= dinnerStart) && (med.frequency === 2 || med.frequency === 3)) || ((dateSelected > dateStart && dateSelected < dateEnd) && (med.frequency === 2 || med.frequency === 3))) {
           if (med.indication === 'Before food') {
             let medsBfDinner = [med, ...this.state.bf_dinner];
             this.setState({bf_dinner: medsBfDinner})
@@ -69,7 +69,7 @@ class MedList extends React.Component {
         }
 
         //check for lunch (cut off is > breakfastCutOff at 10am and <= lunchCutOff at 4pm)
-        if ((med.frequency === 3 && dateSelected === dateStart && ((timeMedStart > lunchStart && timeMedStart < dinnerStart) || (timeMedStart < lunchStart))) || (med.frequency === 3 && dateSelected > dateStart && dateSelected <= dateEnd)) {
+        if ((med.frequency === 3 && dateSelected === dateStart && ((timeMedStart > lunchStart && timeMedStart < dinnerStart) || (timeMedStart < lunchStart))) || (med.frequency === 3 && dateSelected > dateStart && dateSelected < dateEnd)) {
           if (med.indication === 'Before food'){
             let medsBfLunch = [med, ...this.state.bf_lunch];
             this.setState({bf_lunch: medsBfLunch})
