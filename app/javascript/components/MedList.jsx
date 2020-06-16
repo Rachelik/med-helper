@@ -109,6 +109,7 @@ class MedList extends React.Component {
       showForm: false,
       showAll: false,
       beingEdited: false,
+      beingDeleted: false,
       med: []
     });
 
@@ -163,16 +164,22 @@ class MedList extends React.Component {
   deleteClickHandler = async (event) => {
     const sure = window.confirm('Are you sure?');
     if(sure) {
-      const url = "/meds/"+event.target.value
+      const id = event.target.value
+      const url = "/meds/"+id
       const token = document.querySelector('[name=csrf-token]').content
       axios.defaults.headers.common['X-CSRF-TOKEN'] = token
       await axios
         .delete(url)
         .then((response) => {
-          console.log(response.data)
+          const meds = this.state.meds.filter(med => med.id != id)
+          this.setState({beingDeleted: true, meds: meds})
+          console.log("Medicine deleted")
         })
-      }
+        .catch(error=>{
+        console.log(error);
+        })
     }
+  }
 
 
   showAllList = () => {
@@ -316,7 +323,7 @@ class MedList extends React.Component {
 
           <button onClick={this.showAllClick}>Index</button>
 
-          {this.state.showAll ? this.showAllList() : null}
+          {this.state.showAll || (this.state.beingDeleted && this.state.showAll) ? this.showAllList() : null}
 
           {this.state.beingEdited ? this.showEditForm() : null}
 
