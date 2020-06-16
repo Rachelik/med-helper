@@ -55,8 +55,7 @@ export default class Form extends React.Component {
         duration: this.state.duration,
         user_id: this.state.user_id
       };
-      const token =
-            document.querySelector('[name=csrf-token]').content
+      const token = document.querySelector('[name=csrf-token]').content
       axios.defaults.headers.common['X-CSRF-TOKEN'] = token
       await axios
         .post(url, payload)
