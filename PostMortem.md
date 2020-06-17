@@ -38,5 +38,5 @@ Code design documents or architecture drawings / diagrams.
 - Assignments.
 
 *How is the overall level of the course overall? (instruction, course materials, etc.)*
-- The basic helps.
+- The basic and assignments helped.
 - However, a bit blur on the overall. As in when dealing with full stack, not sure what I did was right.
