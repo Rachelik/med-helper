@@ -67,6 +67,10 @@ class MedsController < ApplicationController
   # DELETE /meds/1.json
   def destroy
     @med.destroy
+    respond_to do |format|
+      format.html { redirect_to meds_url, notice: 'Med was successfully destroyed.' }
+      format.json { head :no_content }
+    end
   end
 
   private

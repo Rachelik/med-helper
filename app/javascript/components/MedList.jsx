@@ -26,6 +26,21 @@ class MedList extends React.Component {
 
   //sort meds fn to its category
   sortDataFn = (medsJsonData) => {
+        // const data = {
+        //   meds: [],
+        //   bf_breakfast: [],
+        //   aft_breakfast: [],
+        //   bf_lunch: [],
+        //   aft_lunch: [],
+        //   bf_dinner: [],
+        //   aft_dinner: [],
+        //   selectedDate: date,
+        //   showForm: false,
+        //   showAll: false,
+        //   beingEdited: false,
+        //   beingDeleted: false,
+        //   med: []
+        // }
     medsJsonData.forEach(med => {
       let dateStart = moment(med.date_start).startOf('day').format()
       let datetimeEnd = moment(med.date_start).add(med.duration, 'day')
@@ -75,12 +90,14 @@ class MedList extends React.Component {
             this.setState({bf_lunch: medsBfLunch})
           } else if (med.indication === 'After food') {
             let medsAftLunch = [med, ...this.state.aft_lunch];
+            data[aft_lunch]=medsAftLunch
             this.setState({aft_lunch: medsAftLunch})
           }
         }
 
       }
     })
+    // this.setState(data)
   };
 
   //display today on refresh
@@ -165,7 +182,7 @@ class MedList extends React.Component {
     const sure = window.confirm('Are you sure?');
     if(sure) {
       const id = event.target.value
-      const url = "/meds/"+id
+      const url = "/meds/"+id+".json"
       const token = document.querySelector('[name=csrf-token]').content
       axios.defaults.headers.common['X-CSRF-TOKEN'] = token
       await axios
@@ -229,6 +246,7 @@ class MedList extends React.Component {
     let bfBreakfast = this.state.bf_breakfast
       .map((med)=>{
         return (
+          //
           <Med medIndex={med.id} medName={med.name} medDosage={med.dosage} />
         );
     });
